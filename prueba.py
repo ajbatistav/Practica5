@@ -13,6 +13,18 @@ def insertar (nombrecontacto,numerocontacto,correocontacto):
    con.commit()
    print("Datos Guardados")
    
+def busquedanombre(nombrecontacto):
+    query3 = """ SELECT *  FROM contactos WHERE nombrecontacto = ? """
+    cursor.execute(query3, (nombrecontacto,))
+    res = cursor.fetchall()
+    print(res)
+
+def busquedanumero(numerocontacto):
+    query4 = """ SELECT * FROM contactos WHERE numerocontacto = ? """
+    cursor.execute(query4, (numerocontacto,))
+    res = cursor.fetchall()
+    print(res)
+
 
 print("Bienbenido a su agenda")
 def menu():
@@ -34,22 +46,37 @@ while select != 6:
         numerocontacto = int(input("Numero: "))
         correocontacto = str(input("Correo Electronico: "))
         insertar(nombrecontacto,numerocontacto,correocontacto)             
-        
+        input("Pulse para continuar ")
 
         menu()
         select = int(input("> "))
 
     if select == 2: #Ver todos los contactos
-        print("Lista de contactos: ")
-        cursor.execute(query2)
-        result = cursor.fetchall()
-        print(result)
+       
+       print("Lista de contactos: ")
+       cursor.execute(query2)
+       result = cursor.fetchall()
+       print(result)
+       input("Pulse para continuar ")
         
-        menu()
-        select = int(input("> "))
+       menu()
+       select = int(input("> "))
     
     if select == 3: #buscar contacto
-
-
-
-
+        print("Desea buscar por nombre o numero: ")
+        print("1.Nombre")
+        print("2.Numero")
+        sl2 = int(input("> "))
+        if sl2 == 1:
+            nb = str(input("Inserte nombre: "))
+            busquedanombre(nb)
+            input("Pulse para continuar ")
+            menu()
+            select = int(input("> "))
+        elif sl2 == 2:
+            nbb = int(input("Inserte numero: "))
+            busquedanumero(nbb)
+            input("Pulse para continuar ")
+            menu()
+            select = int(input("> "))
+                        
