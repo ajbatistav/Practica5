@@ -25,8 +25,13 @@ def busquedanumero(numerocontacto):
     res = cursor.fetchall()
     print(res)
 
+def actualizarcontacto(nombrecontacto,numerocontacto,correocontacto,contactoid):
+   query6 = """ UPDATE  contactos SET nombrecontacto = ?, numerocontacto = ?, correocontacto = ? where contactoid = ?; """
+   cursor.execute(query6,[nombrecontacto,numerocontacto,correocontacto,contactoid])
+        
 
-print("Bienbenido a su agenda")
+print("Bienvenido a su agenda")
+
 def menu():
     print("Que desea hacer: ")
     print("1.Agregar nuevo contacto.")
@@ -37,6 +42,8 @@ def menu():
     print("6.Salir.")
 
 #cursor.execute(query0)
+
+
 menu()
 select = int(input("> "))
 while select != 6:
@@ -68,11 +75,11 @@ while select != 6:
         print("2.Numero")
         sl2 = int(input("> "))
         if sl2 == 1:
-            nb = str(input("Inserte nombre: "))
-            busquedanombre(nb)
-            input("Pulse para continuar ")
-            menu()
-            select = int(input("> "))
+           nb = str(input("Inserte nombre: "))
+           busquedanombre(nb)
+           input("Pulse para continuar ")
+           menu()
+           select = int(input("> "))
         elif sl2 == 2:
             nbb = int(input("Inserte numero: "))
             busquedanumero(nbb)
@@ -80,3 +87,16 @@ while select != 6:
             menu()
             select = int(input("> "))
                         
+    if select == 4:#Actualizar contacto
+        cursor.execute(query2)
+        result = cursor.fetchall()
+        print(result)
+        idconsult = int(input("Por favor ingrese el id del contacto (numero que antecede al nombre): "))
+        nombrecontacto = str(input("Introduzca el nuevo nombre: "))
+        numerocontacto = int(input("Introduzca el nuevo numero: "))
+        correocontacto = str(input("Indroduzca el nuevo correo electronico: "))        
+        actualizarcontacto(nombrecontacto,numerocontacto,correocontacto,idconsult)
+        busquedanombre(nombrecontacto)
+
+        menu()
+        select = int(input("> "))        
