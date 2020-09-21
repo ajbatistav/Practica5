@@ -28,6 +28,7 @@ def busquedanumero(numerocontacto):
 def actualizarcontacto(nombrecontacto,numerocontacto,correocontacto,contactoid):
    query6 = """ UPDATE  contactos SET nombrecontacto = ?, numerocontacto = ?, correocontacto = ? where contactoid = ?; """
    cursor.execute(query6,[nombrecontacto,numerocontacto,correocontacto,contactoid])
+   con.commit()
         
 
 print("Bienvenido a su agenda")
